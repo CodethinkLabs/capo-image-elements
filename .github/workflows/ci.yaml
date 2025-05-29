@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     strategy:
       matrix:
         os:
@@ -64,7 +66,7 @@ jobs:
           retention-days: 7
 
       - name: Upload image to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
           files: ${{ env.IMAGE_NAME }}.qcow2
